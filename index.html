@@ -1,0 +1,882 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fff5f7">
+
+<title>给宝宝的一封信 ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
+
+:root {
+  --blue: #203b82;
+  --pink: #f3b3c8;
+  --pink-dark: #d985a6;
+  --pink-light: #ffe8ef;
+  --cream: #fffaf8;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 24px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 15% 15%, #ffe8ef 0%, transparent 40%),
+    radial-gradient(ellipse at 90% 85%, #e9edff 0%, transparent 42%),
+    #fffaf8;
+  color: var(--blue);
+  font-family: 'Nunito', 'Noto Sans SC', sans-serif;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Background decoration */
+
+.decor {
+  position: fixed;
+  color: var(--pink);
+  opacity: .65;
+  pointer-events: none;
+  user-select: none;
+  animation: drift 4s ease-in-out infinite;
+}
+
+.decor.one {
+  top: 12%;
+  left: 9%;
+  font-size: 24px;
+}
+
+.decor.two {
+  top: 20%;
+  right: 10%;
+  font-size: 17px;
+  animation-delay: 1s;
+}
+
+.decor.three {
+  bottom: 14%;
+  left: 12%;
+  font-size: 20px;
+  animation-delay: 2s;
+}
+
+.decor.four {
+  bottom: 18%;
+  right: 9%;
+  font-size: 26px;
+  animation-delay: .5s;
+}
+
+@keyframes drift {
+  0%,100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-12px) rotate(8deg); }
+}
+
+/* Main layout */
+
+.wrapper {
+  width: 100%;
+  max-width: 430px;
+  position: relative;
+  z-index: 2;
+}
+
+.top-label {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--pink-dark);
+  margin-bottom: 19px;
+}
+
+.card {
+  background: rgba(255,255,255,.94);
+  border: 1px solid #f5e1e7;
+  border-radius: 28px;
+  padding: 30px 24px;
+  box-shadow:
+    0 15px 45px rgba(100,65,100,.07),
+    0 3px 10px rgba(100,65,100,.03);
+  text-align: center;
+}
+
+.tiny-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #c49aaa;
+  font-weight: 700;
+}
+
+/* Envelope */
+
+.envelope-area {
+  height: 235px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 900px;
+  margin: 8px 0 0;
+}
+
+.envelope {
+  width: 245px;
+  height: 155px;
+  position: relative;
+  cursor: pointer;
+  animation: envelopeFloat 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 12px 12px rgba(200,120,155,.12));
+}
+
+@keyframes envelopeFloat {
+  0%,100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-9px) rotate(1deg); }
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: #f2c0d0;
+  border-radius: 9px;
+}
+
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 9px;
+  background: #f7d3df;
+  clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+  z-index: 3;
+}
+
+.envelope-front:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #f1b9cc;
+  clip-path: polygon(0 100%, 50% 47%, 100% 100%);
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 122.5px solid transparent;
+  border-right: 122.5px solid transparent;
+  border-top: 90px solid #eaa8bf;
+  transform-origin: top center;
+  transition: transform .8s ease;
+  z-index: 4;
+}
+
+.envelope-letter {
+  position: absolute;
+  left: 18px;
+  top: 12px;
+  width: 209px;
+  height: 130px;
+  background: white;
+  border-radius: 5px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pink-dark);
+  font-size: 19px;
+  font-weight: 700;
+  transition: transform 1s ease .2s;
+}
+
+.envelope-seal {
+  position: absolute;
+  top: 68px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  width: 39px;
+  height: 39px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #fff0f4;
+  color: #e47e9e;
+  font-size: 21px;
+  box-shadow: 0 2px 8px #b9759030;
+  transition: opacity .3s;
+}
+
+.envelope.open {
+  animation: none;
+}
+
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope.open .envelope-letter {
+  transform: translateY(-100px);
+}
+
+.envelope.open .envelope-seal {
+  opacity: 0;
+}
+
+/* Intro */
+
+.intro-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--blue);
+  margin: 7px 0;
+}
+
+.intro-sub {
+  font-size: 14px;
+  color: #ad8195;
+  margin-top: 8px;
+}
+
+.tap-hint {
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--pink-dark);
+  animation: blink 1.7s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: .45; }
+}
+
+/* Letter screen */
+
+#letterScreen {
+  display: none;
+  animation: reveal .8s ease both;
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.letter-card {
+  position: relative;
+  background: var(--white);
+  border: 1px solid #f6e5eb;
+  border-radius: 22px;
+  padding: 28px 21px;
+  box-shadow: 0 10px 35px rgba(100,65,100,.06);
+}
+
+.letter-top {
+  color: var(--pink-dark);
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.letter-heart {
+  font-size: 34px;
+  margin: 16px 0 6px;
+}
+
+.letter-card h1 {
+  color: var(--blue);
+  font-size: 29px;
+  margin: 8px 0 18px;
+}
+
+.message {
+  font-size: 20px;
+  line-height: 2.1;
+  color: var(--blue);
+}
+
+.message .pink {
+  color: var(--pink-dark);
+}
+
+.divider {
+  width: 45px;
+  height: 2px;
+  background: #f2c2d2;
+  margin: 22px auto;
+  border-radius: 5px;
+}
+
+.question {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--blue);
+  min-height: 31px;
+  margin: 15px 0 19px;
+}
+
+/* Buttons */
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 13px;
+  min-height: 48px;
+}
+
+.btn {
+  border: none;
+  padding: 13px 25px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.btn:active {
+  transform: scale(.94);
+}
+
+.yes-btn {
+  background: var(--blue);
+  color: white;
+  box-shadow: 0 5px 12px #203b8228;
+}
+
+.yes-btn:hover {
+  box-shadow: 0 7px 18px #203b8240;
+  transform: translateY(-2px);
+}
+
+.no-btn {
+  background: #fff0f4;
+  color: #ce7c9d;
+  border: 1px solid #f6d7e2;
+}
+
+.no-btn:hover {
+  background: #ffe4ed;
+}
+
+.no-btn.hidden {
+  display: none;
+}
+
+.footer {
+  margin-top: 23px;
+  font-size: 11px;
+  color: #c3a0ae;
+}
+
+/* Custom CSS teddy bear */
+
+.bear-stage {
+  height: 165px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.bear {
+  width: 120px;
+  height: 130px;
+  position: relative;
+  animation: bearBounce 1.4s ease-in-out infinite;
+}
+
+@keyframes bearBounce {
+  0%,100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+.bear-ear {
+  width: 39px;
+  height: 39px;
+  border-radius: 50%;
+  background: #bd8b78;
+  position: absolute;
+  top: 4px;
+  border: 3px solid #a87868;
+}
+
+.bear-ear.left { left: 9px; }
+.bear-ear.right { right: 9px; }
+
+.bear-ear:after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  background: #efb8c5;
+  border-radius: 50%;
+}
+
+.bear-head {
+  position: absolute;
+  width: 94px;
+  height: 88px;
+  top: 19px;
+  left: 13px;
+  background: #d5a48d;
+  border: 3px solid #a87868;
+  border-radius: 46% 46% 48% 48%;
+  z-index: 2;
+}
+
+.bear-body {
+  position: absolute;
+  width: 76px;
+  height: 51px;
+  left: 22px;
+  bottom: 0;
+  background: #d5a48d;
+  border: 3px solid #a87868;
+  border-radius: 40px 40px 28px 28px;
+  z-index: 1;
+}
+
+.bear-body:after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 30px;
+  background: #f5d6d1;
+  border-radius: 50%;
+  left: 21px;
+  top: 9px;
+}
+
+.bear-face {
+  position: absolute;
+  top: 26px;
+  left: 13px;
+  width: 62px;
+  height: 48px;
+  background: #f5d6c9;
+  border-radius: 50%;
+}
+
+.bear-eye {
+  width: 6px;
+  height: 8px;
+  background: #533c3a;
+  border-radius: 50%;
+  position: absolute;
+  top: 18px;
+}
+
+.bear-eye.left { left: 16px; }
+.bear-eye.right { right: 16px; }
+
+.bear-nose {
+  width: 11px;
+  height: 8px;
+  background: #79534d;
+  border-radius: 50%;
+  position: absolute;
+  left: 26px;
+  top: 27px;
+}
+
+.bear-blush {
+  width: 12px;
+  height: 7px;
+  background: #e99aaa;
+  border-radius: 50%;
+  position: absolute;
+  top: 27px;
+}
+
+.bear-blush.left { left: 4px; }
+.bear-blush.right { right: 4px; }
+
+.bear-bow {
+  position: absolute;
+  z-index: 4;
+  top: 12px;
+  left: 48px;
+  font-size: 24px;
+  transform: rotate(-15deg);
+}
+
+.bear-heart {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 23px;
+  animation: heartBeat .9s infinite;
+}
+
+@keyframes heartBeat {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+/* Result screen */
+
+#result {
+  display: none;
+  animation: reveal .7s ease both;
+}
+
+.result-card {
+  background: white;
+  border: 1px solid #f6e5eb;
+  border-radius: 22px;
+  padding: 27px 18px;
+  box-shadow: 0 10px 35px rgba(100,65,100,.06);
+}
+
+.result-tag {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--pink-dark);
+  font-weight: 800;
+}
+
+.big-heart {
+  font-size: 65px;
+  animation: heartBeat .8s infinite;
+  margin: 8px 0;
+}
+
+.result-title {
+  font-size: 29px;
+  font-weight: 800;
+  color: #df83a5;
+  margin: 10px 0;
+}
+
+.result-message {
+  font-size: 16px;
+  color: var(--blue);
+  line-height: 2;
+}
+
+.result-bottom {
+  font-size: 11px;
+  color: #c49aaa;
+  margin-top: 23px;
+}
+
+/* Floating hearts */
+
+.floating-heart {
+  position: fixed;
+  bottom: -35px;
+  pointer-events: none;
+  z-index: 10;
+  animation: floatUp 4.5s linear forwards;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+@media(max-width:380px) {
+  .card { padding: 25px 16px; }
+  .letter-card { padding: 25px 15px; }
+  .intro-title { font-size: 21px; }
+  .envelope { transform: scale(.9); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="decor one">♡</div>
+<div class="decor two">✧</div>
+<div class="decor three">♡</div>
+<div class="decor four">✦</div>
+
+<div class="wrapper">
+
+  <div class="top-label">
+    MADE WITH LOVE FOR YOU ♡
+  </div>
+
+  <!-- ENVELOPE INTRO -->
+
+  <div class="card" id="envelopeScreen">
+
+    <div class="tiny-label">
+      A LITTLE SURPRISE
+    </div>
+
+    <div class="envelope-area">
+
+      <div class="envelope" id="envelope"
+           onclick="openLetter()">
+
+        <div class="envelope-back"></div>
+
+        <div class="envelope-letter">
+          给宝宝 ♡
+        </div>
+
+        <div class="envelope-flap"></div>
+
+        <div class="envelope-front"></div>
+
+        <div class="envelope-seal">♥</div>
+
+      </div>
+
+    </div>
+
+    <div class="intro-title">
+      嗨 宝宝 ♡
+    </div>
+
+    <div class="intro-sub">
+      有一封小小的信，想送给你
+    </div>
+
+    <div class="tap-hint">
+      ↓ 点击信封打开 ↓
+    </div>
+
+  </div>
+
+
+  <!-- LOVE LETTER -->
+
+  <div id="letterScreen" class="card">
+
+    <div class="letter-card">
+
+      <div class="letter-top">
+        A LETTER JUST FOR YOU
+      </div>
+
+      <div class="letter-heart">♡</div>
+
+      <h1>嗨 宝宝</h1>
+
+      <div class="message">
+        我喜欢你<br>
+        <span class="pink">我想你了</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="question" id="question">
+        你想我吗？ 🥺
+      </div>
+
+      <div class="buttons">
+
+        <button class="btn yes-btn"
+                onclick="sayYes()">
+          想你 💗
+        </button>
+
+        <button class="btn no-btn"
+                id="no"
+                onclick="sayNo()">
+          不想 🙈
+        </button>
+
+      </div>
+
+      <div class="footer">
+        不可以骗我哦 ♡
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- YES ENDING -->
+
+  <div id="result" class="card">
+
+    <div class="result-card">
+
+      <div class="result-tag">
+        OUR LITTLE HAPPY ENDING
+      </div>
+
+      <div class="bear-stage">
+
+        <div class="bear">
+
+          <div class="bear-ear left"></div>
+          <div class="bear-ear right"></div>
+
+          <div class="bear-body"></div>
+
+          <div class="bear-head">
+
+            <div class="bear-face">
+
+              <div class="bear-eye left"></div>
+              <div class="bear-eye right"></div>
+
+              <div class="bear-nose"></div>
+
+              <div class="bear-blush left"></div>
+              <div class="bear-blush right"></div>
+
+            </div>
+
+          </div>
+
+          <div class="bear-bow">🎀</div>
+
+          <div class="bear-heart">💗</div>
+
+        </div>
+
+      </div>
+
+      <div class="big-heart">💗</div>
+
+      <div class="result-title">
+        我也是呀！
+      </div>
+
+      <div class="result-message">
+        我也好想你<br>
+        给你一个大大的抱抱！
+      </div>
+
+      <div class="result-bottom">
+        YOU ARE MY FAVOURITE PERSON ♡
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+let noCount = 0;
+let opened = false;
+
+const questions = [
+  "你确定吗？🥺",
+  "你真的确定吗？😭",
+  "你真的真的确定吗？💔"
+];
+
+
+/* Open the envelope */
+
+function openLetter() {
+
+  if (opened) return;
+
+  opened = true;
+
+  const envelope = document.getElementById("envelope");
+
+  envelope.classList.add("open");
+
+  setTimeout(() => {
+
+    document.getElementById("envelopeScreen").style.display = "none";
+
+    document.getElementById("letterScreen").style.display = "block";
+
+  }, 1300);
+
+}
+
+
+/* NO button interaction */
+
+function sayNo() {
+
+  const question = document.getElementById("question");
+  const noButton = document.getElementById("no");
+
+  if (noCount < questions.length) {
+
+    question.innerText = questions[noCount];
+
+    noCount++;
+
+  } else {
+
+    noButton.classList.add("hidden");
+
+    question.innerText = "嘿嘿，只能选想我啦 💗";
+
+  }
+
+}
+
+
+/* YES button interaction */
+
+function sayYes() {
+
+  document.getElementById("letterScreen").style.display = "none";
+
+  document.getElementById("result").style.display = "block";
+
+  for (let i = 0; i < 45; i++) {
+
+    setTimeout(createHeart, i * 90);
+
+  }
+
+}
+
+
+/* Floating pink hearts */
+
+function createHeart() {
+
+  const heart = document.createElement("div");
+
+  heart.className = "floating-heart";
+
+  const hearts = ["💗", "💕", "💖", "♡", "💓"];
+
+  heart.innerText = hearts[
+    Math.floor(Math.random() * hearts.length)
+  ];
+
+  heart.style.left = Math.random() * 100 + "vw";
+
+  heart.style.fontSize =
+    (16 + Math.random() * 24) + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 4500);
+
+}
+
+</script>
+
+</body>
+</html>
